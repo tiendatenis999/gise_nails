@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Tienda de Computadores</title>
+  <link rel="stylesheet" href="Vista/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="Vista/script/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  
+</head>
+<body>
+  <header>
+    <h1>Dashboard de Estadísticas</h1>
+    <h3><i class="fas fa-laptop-code fa-fade"></i> Grupo Paccila</h3>
+    <nav class="navbar-custom">
+      <div class="nav-left">
+        <a href="index.php?accion=productos"><i class="fas fa-box fa-beat"></i> Productos</a>
+        <a href="index.php?accion=categorias"><i class="fas fa-tags fa-beat"></i> Categorías</a>
+        <a href="index.php?accion=pedidos"><i class="fas fa-shopping-cart fa-beat"></i> Pedidos</a>
+        <a href="index.php?accion=dashboard"><i class="fas fa-chart-line fa-beat"></i> Dashboard</a>
+      </div>
+      <div class="nav-right">
+        <a href="index.php?accion=logout" class="logout-link">
+          <i class="fas fa-sign-out-alt fa-beat"></i> Cerrar Sesión
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="dashboard-main-grid">
+    <div class="dashboard-charts">
+      <div class="dashboard-card">
+        <h3><i class="fas fa-chart-area"></i> Pedidos por Mes</h3>
+        <div id="chartPedidosMes"></div>
+      </div>
+      <div class="dashboard-card">
+        <h3><i class="fas fa-chart-pie"></i> Ventas por Categoría</h3>
+        <div id="chartVentasCategoria"></div>
+      </div>
+    </div>
+    <div class="dashboard-side">
+      <div class="dashboard-card">
+        <h3><i class="fas fa-fire"></i> Productos Más Vendidos</h3>
+        <div id="chartProductosMasVendidos"></div>
+      </div>
+      <div class="dashboard-card">
+        <h3><i class="fas fa-user-friends"></i> Cliente Más Frecuente</h3>
+        <div id="clienteFrecuente" class="dashboard-info"></div>
+        <h3 style="margin-top:2rem;"><i class="fas fa-box-open"></i> Producto Menos Vendido</h3>
+        <div id="productoMenosVendido" class="dashboard-info"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-row">
+    <div class="dashboard-card" style="grid-column:1/-1;">
+      <h3><i class="fas fa-list"></i> Transacciones Recientes</h3>
+      <div style="overflow-x:auto;">
+        <table class="dashboard-table">
+          <thead>
+            <tr>
+              <th>Descripción</th>
+              <th>Categoría</th>
+              <th>Fecha</th>
+              <th>Monto</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody id="tablaTransacciones"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Pedidos por mes (área)
+    $.get('Modelo/dashboard_pedidos_mes.php', function (resp) {
+      const data = JSON.parse(resp);
+      var options = {
+        chart: { type: 'area', height: 180, toolbar: { show: false } },
+        series: [{ name: 'Pedidos', data: data.cantidades }],
+        xaxis: { categories: data.meses },
+        colors: ['#1a73e8'],
+        dataLabels: { enabled: false },
+        fill: { type: "gradient", gradient: { shadeIntensity: 1, opacityFrom: 0.5, opacityTo: 0.1 } }
+      };
+      new ApexCharts(document.querySelector("#chartPedidosMes"), options).render();
+    });
+
+    // Ventas por categoría (pastel)
+    $.get('Modelo/dashboard_ventas_categoria.php', function (resp) {
+      const data = JSON.parse(resp);
+      var options = {
+        chart: { type: 'pie', height: 180 },
+        series: data.cantidades,
+        labels: data.categorias,
+        colors: ['#1a73e8','#00b894','#e67e22','#e74c3c','#fdcb6e','#636e72'],
+        legend: { position: 'bottom' }
+      };
+      new ApexCharts(document.querySelector("#chartVentasCategoria"), options).render();
+    });
+
+    // Productos más vendidos (barras horizontales)
+    $.get('Modelo/dashboard_productos_mas_vendidos_grafico.php', function (resp) {
+      const data = JSON.parse(resp);
+      var options = {
+        chart: { type: 'bar', height: 180, toolbar: { show: false } },
+        series: [{ name: 'Vendidos', data: data.cantidades }],
+        xaxis: { categories: data.productos },
+        colors: ['#00b894'],
+        plotOptions: { bar: { horizontal: true } },
+        dataLabels: { enabled: false }
+      };
+      new ApexCharts(document.querySelector("#chartProductosMasVendidos"), options).render();
+    });
+
+    // Cliente más frecuente
+    $.get('Modelo/dashboard_cliente_frecuente.php', function (resp) {
+      const data = JSON.parse(resp);
+      $("#clienteFrecuente").html(`
+        <div style="font-size:1.1em;">
+          <b>${data.nombre}</b> <br>
+          <span style="color:#888;">${data.correo}</span><br>
+          <span style="font-size:1em;color:#1a73e8;">Pedidos: ${data.pedidos}</span>
+        </div>
+      `);
+    });
+
+    // Producto menos vendido
+    $.get('Modelo/dashboard_producto_menos_vendido.php', function (resp) {
+      const data = JSON.parse(resp);
+      $("#productoMenosVendido").html(`
+        <div style="font-size:1.1em;">
+          <b>${data.producto}</b><br>
+          <span style="font-size:1em;color:#e67e22;">Vendidos: ${data.cantidad}</span>
+        </div>
+      `);
+    });
+
+    // Transacciones recientes (últimos pedidos)
+    $.get('Modelo/dashboard_transacciones_recientes.php', function (resp) {
+      $("#tablaTransacciones").html(resp);
+    });
+  </script>
+  <footer>
+    <p>&copy; 2025 Tienda de Tenis. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>

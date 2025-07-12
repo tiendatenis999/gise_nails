@@ -1,0 +1,149 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computadores y Repuestos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="Vista/script/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="Vista/css/styles.css">
+</head>
+
+<body>
+  <header>
+    <h1>Computadores y Repuestos</h1>
+    <h3><i class="fas fa-laptop-code fa-fade"></i> Grupo Paccila</h3>
+    <nav class="navbar-custom">
+      <div class="nav-left">
+        <a href="index.php?accion=productos">
+          <i class="fas fa-box fa-beat"></i> Productos
+        </a>
+        <a href="index.php?accion=categorias">
+          <i class="fas fa-tags fa-beat"></i> Categorías
+        </a>
+        <a href="index.php?accion=pedidos">
+          <i class="fas fa-shopping-cart fa-beat"></i> Pedidos
+        </a>
+        <a href="index.php?accion=dashboard">
+          <i class="fas fa-chart-line fa-beat"></i> Dashboard
+        </a>
+      </div>
+      <div class="nav-right">
+        <a href="index.php?accion=logout" class="logout-link">
+          <i class="fas fa-sign-out-alt fa-beat"></i> Cerrar Sesión
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <section id="panel-admin">
+    <h2>Panel de Administración</h2>
+
+    <div class="admin-section">
+      <h3>Productos</h3>
+      <!-- Filtros de productos -->
+      <form id="filtroProductosAdminFiltro" class="form-admin" style="margin-bottom:1.5rem;">
+        <input type="text" name="marca" id="filtroMarcaFiltro" placeholder="Marca">
+        <select name="tipo" id="filtroTipoFiltro">
+          <option value="">Todos los tipos</option>
+          <option value="Computador">Computador</option>
+          <option value="Repuesto">Repuesto</option>
+        </select>
+        <select name="categoria" id="filtroCategoriaFiltro">
+          <option value="">Todas las categorías</option>
+        </select>
+        <button type="submit"><i class="fas fa-filter"></i> Filtrar</button>
+      </form>
+      <form id="formRegistrarProducto" class="form-admin" method="post" enctype="multipart/form-data">
+        <input type="text" name="marca" placeholder="Marca del producto" required>
+        <input type="text" name="modelo" placeholder="Modelo" required>
+        <select name="tipo" id="categoriaTipo" required>
+          <option value="Repuesto">Repuesto</option>
+          <option value="Computador">Computador</option>
+        </select>
+        <input type="text" name="especificaciones" placeholder="Especificaciones" required>
+        <input type="number" name="precio" placeholder="Precio" required>
+        <select name="categoria" id="categoriaProducto" required>
+          <option value="">Seleccionar categoría</option>
+        </select>
+        <input type="file" name="imagenes[]" multiple required>
+        <button type="submit">
+          <i class="fas fa-save"></i> Guardar Producto
+        </button>
+      </form>
+      <table class="tabla-productos">
+        <thead>
+          <tr>
+            <th><i class="fas fa-hashtag"></i> ID</th>
+            <th><i class="fas fa-industry"></i> Marca</th>
+            <th><i class="fas fa-barcode"></i> Modelo</th>
+            <th><i class="fas fa-desktop"></i> Tipo</th>
+            <th><i class="fas fa-list"></i> Especificaciones</th>
+            <th><i class="fas fa-dollar-sign"></i> Precio</th>
+            <th><i class="fas fa-tags"></i> Categoría</th>
+            <th><i class="fas fa-cogs"></i> Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyProductosAdmin">
+          <?php require_once __DIR__ . '/../../Modelo/listarProductos.php'; ?>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <footer>
+    <p>&copy; 2025 Tienda de Tenis. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Formulario flotante para la edicion de productos-->
+  <div id="formEditarProductoOverlay" class="overlay" style="display:none;">
+    <div class="form-flotante">
+      <span class="cerrar" id="cerrarFormEditarProducto">&times;</span>
+      <h2>Editar Producto</h2>
+      <form id="formEditarProducto" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="id" id="editarId">
+        <label>Marca:</label>
+        <input type="text" name="marca" id="editarMarca" required>
+        <label>Modelo:</label>
+        <input type="text" name="modelo" id="editarModelo" required>
+        <label>Tipo:</label>
+        <select name="tipo" id="editarTipo" required>
+          <option value="Computador">Computador</option>
+          <option value="Repuesto">Repuesto</option>
+        </select>
+        <label>Especificaciones:</label>
+        <input type="text" name="especificaciones" id="editarEspecificaciones" required>
+        <label>Precio:</label>
+        <input type="number" name="precio" id="editarPrecio" required>
+        <label>Categoría:</label>
+        <select name="categoria" id="editarCategoria" required>
+          <option value="">Seleccionar categoría</option>
+        </select>
+        <label>Imágenes (dejar vacío para no cambiar):</label>
+        <input type="file" name="imagenes[]" multiple>
+        <button type="submit">Guardar Cambios</button>
+      </form>
+    </div>
+  </div>
+  <div id="formCompraOverlay" class="overlay" style="display:none;">
+    <div class="form-flotante">
+      <span class="cerrar" id="cerrarFormCompra">&times;</span>
+      <h2>Formulario de Compra</h2>
+      <form action="index.php?accion=addPedido" id="formCompra" method="post">
+        <input type="hidden" id="productoSeleccionado" name="producto">
+        <label>Nombre completo:</label>
+        <input type="text" name="nombre" required>
+        <label>Correo electrónico:</label>
+        <input type="email" name="correo" required>
+        <label>Cantidad:</label>
+        <input type="number" name="cantidad" min="1" value="1" required>
+        <button type="submit">Confirmar Compra</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

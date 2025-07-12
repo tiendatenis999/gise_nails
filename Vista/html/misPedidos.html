@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Pedidos</title>
+  <link rel="stylesheet" href="Vista/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="Vista/script/script.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Mis Pedidos</h1>
+    <h3><i class="fas fa-laptop-code fa-fade"></i> Grupo Paccila</h3>
+    <nav class="navbar-custom">
+      <div class="nav-left">
+        <a href="index.php?accion=vista"><i class="fas fa-home fa-beat"></i> Inicio</a>
+        <a href="index.php?accion=misPedidos"><i class="fas fa-box fa-beat"></i> Mis Pedidos</a>
+      </div>
+      <div class="nav-right">
+        <a href="index.php?accion=logout" class="logout-link">
+          <i class="fas fa-sign-out-alt fa-beat"></i> Cerrar Sesión
+        </a>
+      </div>
+    </nav>
+  </header>
+  <section>
+    <h2>Pedidos realizados</h2>
+    <!-- Filtro de búsqueda para pedidos del cliente -->
+    <form id="filtroPedidosCliente" class="form-admin" style="margin-bottom:1.5rem;">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;width:100%;">
+        <div style="position:relative;max-width:220px;width:100%;">
+          <input type="text" id="filtroProductoPedido" placeholder="Buscar producto..." style="padding-left:2rem;width:100%;">
+          <i class="fas fa-search" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);color:#b0b8c1;"></i>
+        </div>
+        <div style="position:relative;max-width:180px;width:100%;">
+          <select id="filtroEstadoPedido" style="width:100%;">
+            <option value="">Todos los estados</option>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Enviado">Enviado</option>
+            <option value="Entregado">Entregado</option>
+            <option value="Cancelado">Cancelado</option>
+          </select>
+          <i class="fas fa-filter" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);color:#b0b8c1;pointer-events:none;"></i>
+        </div>
+        <button type="submit" style="display:flex;align-items:center;gap:6px;">
+          <i class="fas fa-search"></i> Buscar
+        </button>
+      </div>
+    </form>
+    <div style="overflow-x:auto;">
+      <table class="tabla-pedidos">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyMisPedidos">
+          <!-- Aquí se cargarán los pedidos del cliente -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <footer>
+    <p>&copy; 2025 Tienda de Computadores. Todos los derechos reservados.</p>
+  </footer>
+  <script>
+    $(document).ready(function() {
+      $.get('Modelo/listarPedidosCliente.php', function(resp) {
+        $("#tbodyMisPedidos").html(resp);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computadores y Repuestos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="Vista/script/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="Vista/css/styles.css">
+</head>
+
+<body>
+  <header>
+    <h1>Pedidos Realizados</h1>
+    <h3><i class="fas fa-laptop-code fa-fade"></i> Grupo Paccila</h3>
+    <nav class="navbar-custom">
+      <div class="nav-left">
+        <a href="index.php?accion=productos">
+          <i class="fas fa-box fa-beat"></i> Productos
+        </a>
+        <a href="index.php?accion=categorias">
+          <i class="fas fa-tags fa-beat"></i> Categorías
+        </a>
+        <a href="index.php?accion=pedidos">
+          <i class="fas fa-shopping-cart fa-beat"></i> Pedidos
+        </a>
+        <a href="index.php?accion=dashboard">
+          <i class="fas fa-chart-line fa-beat"></i> Dashboard
+        </a>
+      </div>
+      <div class="nav-right">
+        <a href="index.php?accion=logout" class="logout-link">
+          <i class="fas fa-sign-out-alt fa-beat"></i> Cerrar Sesión
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <section id="panel-admin">
+    <h2>Panel de Administración</h2>
+
+    <div class="admin-section">
+      <h3>Pedidos</h3>
+      <!-- Filtros de pedidos -->
+      <form id="filtroPedidosAdminFiltro" class="form-admin filtros-pedidos">
+        <input type="text" name="id" id="filtroIdPedidoFiltro" placeholder="ID Pedido" style="max-width:100px;">
+        <input type="text" name="cliente" id="filtroClienteFiltro" placeholder="Cliente">
+        <input type="date" name="fecha" id="filtroFechaFiltro">
+        <select name="estado" id="filtroEstadoFiltro">
+          <option value="">Todos los estados</option>
+          <option value="Pendiente">Pendiente</option>
+          <option value="Enviado">Enviado</option>
+          <option value="Entregado">Entregado</option>
+          <option value="Cancelado">Cancelado</option>
+        </select>
+        <button type="submit"><i class="fas fa-filter"></i> Filtrar</button>
+      </form>
+      <div style="overflow-x:auto;">
+        <table class="tabla-pedidos">
+          <thead>
+            <tr>
+              <th><i class="fas fa-receipt"></i> ID Pedido</th>
+              <th><i class="fas fa-user"></i> Cliente</th>
+              <th><i class="fas fa-box"></i> Producto</th>
+              <th><i class="fas fa-sort-numeric-up"></i> Cantidad</th>
+              <th><i class="fas fa-calendar-alt"></i> Fecha</th>
+              <th><i class="fas fa-clipboard-check"></i> Estado</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyPedidosAdmin">
+            <?php require_once __DIR__ . '/../../Modelo/listarPedidos.php'; ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  
+  <footer>
+    <p>&copy; 2025 Tienda de Tenis. Todos los derechos reservados.</p>
+  </footer>
+
+  
+</body>
+
+</html>

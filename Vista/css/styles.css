@@ -1,0 +1,1162 @@
+/* =========================
+   Reset y estructura base
+   ========================= */
+html,
+body {
+    height: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* =========================
+   Header y Footer
+   ========================= */
+header {
+    background-color: #2980b9;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 1rem;
+    text-decoration: none;
+}
+
+footer {
+    margin-top: auto;
+    width: 100%;
+    background-color: #2980b9;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    flex-shrink: 0;
+}
+
+/* =========================
+   Navbar moderno y profesional
+   ========================= */
+.navbar-custom {
+    background: #1a355b !important;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-radius: 0 0 8px 8px;
+    padding: 0.7rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-custom .nav-left,
+.navbar-custom .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.navbar-custom a {
+    color: #fff !important;
+    font-weight: 500;
+    margin-right: 1.5rem;
+    transition: color 0.2s;
+}
+
+.navbar-custom a:hover {
+    color: #ffd700 !important;
+    text-decoration: underline;
+}
+
+.navbar-custom .bienvenida {
+    color: #ffd700;
+    font-weight: 600;
+}
+
+.logout-link {
+    background: #e74c3c;
+    color: #fff !important;
+    padding: 6px 18px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.logout-link:hover {
+    background: #c0392b;
+}
+
+/* =========================
+   Secciones y paneles
+   ========================= */
+section {
+    padding: 2rem;
+}
+
+#panel-admin {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#admin {
+    margin: auto;
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 8px;
+}
+
+/* =========================
+   Catálogo de productos
+   ========================= */
+.catalogo,
+.productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 32px;
+    justify-content: center;
+    padding: 10px 0 40px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+
+    .catalogo,
+    .productos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    .catalogo,
+    .productos {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tarjeta de producto */
+.producto {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    min-height: 420px;
+}
+
+.producto:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.producto img {
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.producto h3,
+.producto .titulo-producto {
+    color: #2c3e50;
+    font-size: 1.2rem;
+    margin: 10px 0 5px 0;
+    font-weight: bold;
+}
+
+.producto p {
+    font-size: 0.95rem;
+    color: #6c7a89;
+    margin: 4px 0;
+}
+
+.producto .info {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.producto .controls {
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.producto .btn,
+.producto button,
+.producto a.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #2980b9;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.producto .btn:hover,
+.producto button:hover,
+.producto a.btn:hover {
+    background-color: #3498db;
+}
+
+/* =========================
+   Filtros de productos
+   ========================= */
+.filtros,
+.filtrosForm,
+#filtrosForm {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+#filtrosForm input,
+#filtrosForm select,
+#filtrosForm button {
+    font-size: 1rem;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 8px;
+}
+
+#filtrosForm button {
+    background-color: #2980b9;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+#filtrosForm button:hover {
+    background-color: #3498db;
+}
+
+/* =========================
+   Formularios flotantes y overlays
+   ========================= */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.form-flotante {
+    max-width: 280px;
+    width: 95%;
+    padding: 14px 8px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    position: relative;
+    font-size: 14px;
+}
+
+.form-flotante .cerrar {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.form-flotante label {
+    display: block;
+    margin-top: 0.7rem;
+}
+
+.form-flotante input,
+.form-flotante select,
+.form-flotante button {
+    width: 100%;
+    margin-top: 0.3rem;
+    padding: 0.35rem;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* =========================
+   Tablas (categorías, productos, pedidos)
+   ========================= */
+.tabla-categorias,
+.tabla-productos,
+.tabla-pedidos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+}
+
+.tabla-categorias th,
+.tabla-categorias td,
+.tabla-productos th,
+.tabla-productos td,
+.tabla-pedidos th,
+.tabla-pedidos td {
+    padding: 0.7rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.tabla-categorias th,
+.tabla-productos th,
+.tabla-pedidos th {
+    background: #f5f5f5;
+    font-weight: 600;
+    color: #4F2EDC;
+}
+
+.tabla-categorias tr:last-child td,
+.tabla-productos tr:last-child td,
+.tabla-pedidos tr:last-child td {
+    border-bottom: none;
+}
+
+.tabla-categorias button,
+.tabla-productos button,
+.tabla-pedidos button {
+    margin-right: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    background: #4F2EDC;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+}
+
+.tabla-categorias button:last-child,
+.tabla-productos button:last-child,
+.tabla-pedidos button:last-child {
+    background: #e74c3c;
+}
+
+.tabla-categorias button:hover,
+.tabla-productos button:hover,
+.tabla-pedidos button:hover {
+    opacity: 0.85;
+}
+
+/* =========================
+   Dashboard
+   ========================= */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.dashboard-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    padding: 1.5rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 220px;
+}
+
+.dashboard-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.dashboard-info {
+    font-size: 1rem;
+    color: #444;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* =========================
+   Switch personalizado
+   ========================= */
+.checkbox-wrapper-3 input[type="checkbox"] {
+    visibility: hidden;
+    display: none;
+}
+
+.checkbox-wrapper-3 .toggle {
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 20px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transform: translate3d(0, 0, 0);
+}
+
+.checkbox-wrapper-3 .toggle:before {
+    content: "";
+    position: relative;
+    top: 3px;
+    left: 3px;
+    width: 34px;
+    height: 14px;
+    display: block;
+    background: #9A9999;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.checkbox-wrapper-3 .toggle span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    display: block;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(154, 153, 153, 0.5);
+    transition: all 0.2s ease;
+}
+
+.checkbox-wrapper-3 .toggle span:before {
+    content: "";
+    position: absolute;
+    display: block;
+    margin: -18px;
+    width: 56px;
+    height: 56px;
+    background: rgba(79, 46, 220, 0.5);
+    border-radius: 50%;
+    transform: scale(0);
+    opacity: 1;
+    pointer-events: none;
+}
+
+.checkbox-wrapper-3 input[type="checkbox"]:checked+.toggle:before {
+    background: #947ADA;
+}
+
+.checkbox-wrapper-3 input[type="checkbox"]:checked+.toggle span {
+    background: #4F2EDC;
+    transform: translateX(20px);
+    transition: all 0.2s cubic-bezier(0.8, 0.4, 0.3, 1.25), background 0.15s ease;
+    box-shadow: 0 3px 8px rgba(79, 46, 220, 0.2);
+}
+
+.checkbox-wrapper-3 input[type="checkbox"]:checked+.toggle span:before {
+    transform: scale(1);
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+/* =========================
+   Fondos especiales
+   ========================= */
+.login-bg {
+    background: url('https://storage.needpix.com/rsynced_images/whitespace-3435355_1280.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+body.registro-bg {
+    background: url('https://storage.needpix.com/rsynced_images/whitespace-3435355_1280.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* =========================
+   Login Moderno Doble Tarjeta Translúcida
+   ========================= */
+body.login-bg .login-card,
+body.registro-bg .login-card {
+    margin-bottom: 80px !important;
+    margin-top: 60px !important;
+}
+
+.login-card {
+    max-width: 720px;
+    min-height: 380px;
+    margin: 48px auto 0 auto;
+    background: rgba(255, 255, 255, 0.32) !important;
+    /* <--- AJUSTA LA TRANSPARENCIA AQUÍ */
+    border-radius: 22px;
+    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    padding: 0;
+    align-items: stretch;
+    backdrop-filter: blur(2px);
+}
+
+.login-card-header {
+    flex: 1 1 0;
+    background: linear-gradient(135deg, #4f2edc 60%, #2980b9 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2.5rem 2rem;
+    min-width: 260px;
+    max-width: 320px;
+    border-radius: 0;
+    box-shadow: none;
+    text-align: left;
+}
+
+.login-card-header i {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 0.7rem;
+}
+
+.login-card-header h2 {
+    margin: 0 0 0.3rem 0;
+    font-size: 2rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.login-card-header p {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    margin: 0 0 2rem 0;
+}
+
+.login-card-header .btn-login {
+    background: #fff;
+    color: #4f2edc;
+    border: none;
+    padding: 0.7rem 2.2rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    margin-top: 1.2rem;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+}
+
+.login-card-header .btn-login:hover {
+    background: #ffd700;
+    color: #1a355b;
+}
+
+.login-form {
+    flex: 2 1 0;
+    padding: 2.5rem 2.5rem 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    min-width: 0;
+    gap: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form .input-group {
+    position: relative;
+    margin-bottom: 1.3rem;
+    width: 100%;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-form .input-group input {
+    width: 100%;
+    padding: 1rem 2.5rem 1rem 1rem;
+    border-radius: 8px;
+    border: 1.5px solid #d1d5db;
+    font-size: 1.08rem;
+    background: rgba(245, 247, 250, 0.95);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.04);
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.login-form .input-group input:focus {
+    border-color: #4f2edc;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(79, 46, 220, 0.08);
+}
+
+.login-form .input-group label {
+    position: absolute;
+    left: 1rem;
+    top: -0.95rem;
+    background: #fff;
+    color: #4f2edc;
+    font-size: 0.97rem;
+    padding: 0 0.4rem;
+    border-radius: 4px;
+    pointer-events: none;
+    transition: color 0.2s;
+    font-weight: 500;
+    z-index: 2;
+    display: none;
+    /* Oculta la etiqueta si usas placeholder */
+}
+
+.login-form .input-group i {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #b0b8c1;
+    font-size: 1.2rem;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Botones modernos (login, registro, generales) */
+.login-form .btn-login,
+.login-form .btn-register,
+.filtros button,
+#filtrosForm button,
+form button,
+input[type="submit"],
+input[type="button"] {
+    padding: 0.9rem 2.2rem;
+    /* Más espacio horizontal */
+    gap: 0.8rem;
+    /* Más espacio entre ícono y texto */
+    letter-spacing: 0.5px;
+    /* Opcional: separa un poco las letras */
+}
+
+/* Solo botones dentro de login-form: modernos */
+.login-form .btn-login,
+.login-form .btn-register {
+    background: #4f2edc;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.9rem 2.5rem;      /* Más espacio horizontal */
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;                   /* Más espacio entre ícono y texto */
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
+    letter-spacing: 0.5px;
+}
+
+.login-form .btn-register {
+    background: #fff;
+    color: #4f2edc;
+    border: 2px solid #4f2edc;
+}
+
+.login-form .btn-login:hover,
+.login-form .btn-register:hover {
+    background: #ffd700;
+    color: #1a355b;
+    box-shadow: 0 4px 16px rgba(44, 62, 80, 0.13);
+}
+
+/* Inputs y selects modernos para filtros y formularios generales */
+.filtros input,
+.filtros select,
+.filtrosForm input,
+.filtrosForm select,
+#filtrosForm input,
+#filtrosForm select,
+#filtrosForm textarea,
+#filtrosForm button,
+form input:not(.login-form input),
+form select:not(.login-form select),
+form textarea:not(.login-form textarea) {
+    border: 1.5px solid #d1d5db;
+    border-radius: 7px;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    background: #f8fafc;
+    box-shadow: 0 1px 6px rgba(44, 62, 80, 0.06);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    margin-bottom: 0.5rem;
+}
+
+.filtros input:focus,
+.filtros select:focus,
+.filtrosForm input:focus,
+.filtrosForm select:focus,
+#filtrosForm input:focus,
+#filtrosForm select:focus,
+#filtrosForm textarea:focus,
+form input:focus:not(.login-form input),
+form select:focus:not(.login-form select),
+form textarea:focus:not(.login-form textarea) {
+    border-color: #4f2edc;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(79, 46, 220, 0.09);
+}
+
+/* Botones generales fuera de login-form: modernos */
+.filtros button,
+.filtrosForm button,
+#filtrosForm button,
+form button:not(.login-form button),
+input[type="submit"]:not(.login-form .btn-login):not(.login-form .btn-register),
+input[type="button"]:not(.login-form .btn-login):not(.login-form .btn-register) {
+    background: #4f2edc;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 0.7rem 1.3rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 6px rgba(44, 62, 80, 0.08);
+    margin-bottom: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filtros button:hover,
+.filtrosForm button:hover,
+#filtrosForm button:hover,
+form button:not(.login-form button):hover,
+input[type="submit"]:not(.login-form .btn-login):not(.login-form .btn-register):hover,
+input[type="button"]:not(.login-form .btn-login):not(.login-form .btn-register):hover {
+    background: #2980b9;
+}
+
+/* Paginación moderna */
+.paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.paginacion .pagina-link {
+  display: inline-block;
+  min-width: 32px;
+  padding: 6px 14px;
+  margin: 0 2px;
+  border-radius: 6px;
+  background: #f5f5f5;
+  color: #1a73e8;
+  font-weight: 600;
+  font-size: 1.08em;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+}
+
+.paginacion .pagina-link:hover,
+.paginacion .pagina-link.activa,
+.paginacion .pagina-link.active {
+  background: #1a73e8;
+  color: #fff;
+  border-color: #1a73e8;
+  text-decoration: none;
+}
+
+/* Tabla moderna para dashboard */
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1em;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+  margin-top: 1rem;
+}
+
+.dashboard-table th, .dashboard-table td {
+  padding: 0.7rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.dashboard-table th {
+  background: #f5f5f5;
+  font-weight: 700;
+  color: #1a355b;
+  letter-spacing: 0.5px;
+}
+
+.dashboard-table tr:last-child td {
+  border-bottom: none;
+}
+
+.dashboard-table tbody tr:hover {
+  background: #f0f4fa;
+}
+
+/* Moderniza el input de cantidad y el botón de añadir al carrito */
+#cantidadProducto {
+  width: 70px;
+  padding: 0.5rem 0.7rem;
+  border: 1.5px solid #d1d5db;
+  border-radius: 7px;
+  font-size: 1rem;
+  background: #f8fafc;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  margin-right: 0.7rem;
+  margin-left: 0.5rem;
+}
+
+#cantidadProducto:focus {
+  border-color: #4f2edc;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(79, 46, 220, 0.09);
+}
+
+#btnSolicitarCompra {
+  background: #4f2edc;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.7rem 1.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 6px rgba(44, 62, 80, 0.08);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+#btnSolicitarCompra:hover {
+  background: #2980b9;
+}
+
+/* Alineación horizontal para cantidad y botón */
+#cantidadProducto, #btnSolicitarCompra {
+  vertical-align: middle;
+}
+
+label[for="cantidadProducto"], label:has(+ #cantidadProducto) {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-right: 0.5rem;
+}
+
+/* Responsive: apila en móvil */
+@media (max-width: 600px) {
+  #cantidadProducto, #btnSolicitarCompra, label[for="cantidadProducto"], label:has(+ #cantidadProducto) {
+    display: block;
+    width: 100% !important;
+    margin: 0 0 0.7rem 0 !important;
+  }
+  #btnSolicitarCompra {
+    margin-left: 0 !important;
+  }
+}
+
+/* Responsive para tablets y celulares */
+@media (max-width: 900px) {
+  .dashboard-main-grid, .dashboard-row {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    gap: 1rem !important;
+    margin: 1rem !important;
+  }
+  .dashboard-charts, .dashboard-side {
+    grid-template-rows: auto !important;
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .dashboard-card {
+    min-width: 0 !important;
+    padding: 1rem !important;
+  }
+  .navbar-custom {
+    flex-direction: column;
+    padding: 1rem !important;
+    gap: 0.5rem;
+  }
+  .navbar-custom .nav-left, .navbar-custom .nav-right {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  section, .form-flotante {
+    padding: 1rem !important;
+  }
+  .catalogo, .productos {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .login-card {
+    flex-direction: column !important;
+    max-width: 98vw !important;
+    min-height: 0 !important;
+    padding: 0.5rem !important;
+  }
+  .login-card-header, .login-form {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 1rem !important;
+    border-radius: 0 !important;
+  }
+  .tabla-categorias, .tabla-productos, .tabla-pedidos, .dashboard-table {
+    font-size: 0.95em !important;
+    min-width: 480px;
+  }
+}
+
+/* Responsive para celulares pequeños */
+@media (max-width: 600px) {
+  header, footer {
+    padding: 0.7rem !important;
+    font-size: 1em !important;
+  }
+  h1, h2, h3 {
+    font-size: 1.1em !important;
+  }
+  .dashboard-card, .form-flotante {
+    padding: 0.7rem !important;
+    font-size: 0.97em !important;
+  }
+  .navbar-custom {
+    padding: 0.5rem !important;
+    font-size: 0.97em !important;
+  }
+  .dashboard-table, .tabla-categorias, .tabla-productos, .tabla-pedidos {
+    font-size: 0.90em !important;
+    min-width: 320px;
+  }
+  .dashboard-card h3 {
+    font-size: 1em !important;
+  }
+  .form-flotante input, .form-flotante select, .form-flotante button {
+    font-size: 0.97em !important;
+    padding: 0.5rem !important;
+  }
+  .catalogo, .productos {
+    grid-template-columns: 1fr !important;
+    gap: 0.7rem !important;
+  }
+  .producto {
+    min-height: 320px !important;
+    padding: 0.7rem !important;
+  }
+  .producto img {
+    max-width: 120px !important;
+  }
+  .paginacion .pagina-link {
+    padding: 6px 10px !important;
+    font-size: 0.97em !important;
+  }
+
+
+}
+
+@media (max-width: 700px) {
+  .tabla-categorias,
+  .tabla-productos,
+  .tabla-pedidos,
+  .dashboard-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 600px) {
+  form input, form select, form button {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Modal de carrito de compras moderno */
+#modalCarrito {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.45);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+#modalCarrito > div {
+  background: #fff;
+  padding: 2rem 2.5rem 1.5rem 2.5rem;
+  border-radius: 18px;
+  max-width: 420px;
+  width: 95vw;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+  animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+  from { transform: translateY(40px) scale(0.97); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+#modalCarrito h2 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: #4f2edc;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+
+#cerrarModalCarrito {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #888;
+  transition: color 0.2s;
+  font-weight: bold;
+}
+#cerrarModalCarrito:hover {
+  color: #e74c3c;
+}
+
+#listaCarritoProductos {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.2rem 0;
+}
+
+#listaCarritoProductos li {
+  background: #f8fafc;
+  border-radius: 7px;
+  margin-bottom: 0.7rem;
+  padding: 0.7rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.05em;
+  box-shadow: 0 1px 6px rgba(44,62,80,0.04);
+}
+
+#listaCarritoProductos b {
+  color: #1a355b;
+}
+
+#listaCarritoProductos .btnEliminarDelCarrito {
+  background: white;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.97em;
+  margin-left: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+#listaCarritoProductos .btnEliminarDelCarrito:hover {
+  background: black;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(255, 92, 92, 0.15);
+}
+
+#btnComprarCarritoFinal {
+  background: #4f2edc;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.7rem 1.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 6px rgba(44, 62, 80, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+  margin-left: auto;
+}
+
+#btnComprarCarritoFinal:hover {
+  background: #2980b9;
+}
+
+@media (max-width: 600px) {
+  #modalCarrito > div {
+    padding: 1rem 0.5rem 1rem 0.5rem;
+    max-width: 99vw;
+  }
+  #modalCarrito h2 {
+    font-size: 1.1rem;
+  }
+  #listaCarritoProductos li {
+    font-size: 0.97em;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+}

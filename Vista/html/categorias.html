@@ -1,0 +1,88 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computadores y Repuestos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="Vista/script/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="Vista/css/styles.css">
+</head>
+
+<body>
+  <header>
+    <h1>Categoria de Productos</h1>
+    <h3><i class="fas fa-laptop-code fa-fade"></i> Grupo Paccila</h3>
+    <nav class="navbar-custom">
+      <div class="nav-left">
+        <a href="index.php?accion=productos">
+          <i class="fas fa-box fa-beat"></i> Productos
+        </a>
+        <a href="index.php?accion=categorias">
+          <i class="fas fa-tags fa-beat"></i> Categorías
+        </a>
+        <a href="index.php?accion=pedidos">
+          <i class="fas fa-shopping-cart fa-beat"></i> Pedidos
+        </a>
+        <a href="index.php?accion=dashboard">
+          <i class="fas fa-chart-line fa-beat"></i> Dashboard
+        </a>
+      </div>
+      <div class="nav-right">
+        <a href="index.php?accion=logout" class="logout-link">
+          <i class="fas fa-sign-out-alt fa-beat"></i> Cerrar Sesión
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <section id="panel-admin">
+    <h2>Panel de Administración</h2>
+
+    <div class="admin-section">
+      <h3>Categorías</h3>
+      <form class="form-categoria" id="formCategoria">
+        <input type="text" name="nombre" id="nombreCategoria" placeholder="Nombre de la categoría" required>
+        <button type="submit">Guardar Categoría</button>
+      </form>
+      <table class="tabla-categorias">
+        <thead>
+          <tr>
+            <th><i class="fas fa-tags"></i> Categoría</th>
+            <th><i class="fas fa-cogs"></i> Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="listaCategorias">
+          <!-- Aquí se insertan las filas dinámicamente -->
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+    
+  <footer>
+    
+    <p>&copy; 2025 Tienda de Tenis. Todos los derechos reservados.</p>
+  </footer>
+
+
+  <!-- Formulario flotante para la edición de categorías -->
+  <div id="formEditarCategoriaOverlay" class="overlay" style="display:none;">
+    <div class="form-flotante">
+      <span class="cerrar" id="cerrarFormEditarCategoria">&times;</span>
+      <h2>Editar Categoría</h2>
+      <form id="formEditarCategoria" method="post">
+        <input type="hidden" name="id" id="editarCategoriaId">
+        <label>Nombre de la categoría:</label>
+        <input type="text" name="nombre" id="editarCategoriaNombre" required>
+        <button type="submit">Guardar Cambios</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computadores y Repuestos</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    window.clienteCorreo = "<?php echo isset($_SESSION['cliente_correo']) ? $_SESSION['cliente_correo'] : ''; ?>";
+  </script>
+  <script src="Vista/script/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="Vista/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <h1>Computadores y Repuestos</h1>
+    <h3><i class="fas fa-laptop-code fa-fade"></i> Grupo Paccila</h3>
+    <nav class="navbar-custom">
+      <div class="nav-left">
+        <a href="index.php?accion=vista">
+          <i class="fas fa-home fa-beat"></i> Inicio
+        </a>
+        <?php if(isset($_SESSION["cliente_nombre"])): ?>
+        <a href="#" id="btnVerCarrito">
+          <i class="fas fa-shopping-cart fa-beat"></i> Carrito
+          <span id="carritoCantidad"
+            style="background:#e74c3c;color:#fff;border-radius:50%;padding:2px 8px;font-size:12px;"></span>
+        </a>
+        <span class="bienvenida">
+          <i class="fas fa-user fa-beat"></i> Bienvenido/a,
+          <?php echo htmlspecialchars($_SESSION["cliente_nombre"]); ?>
+        </span>
+        <?php else: ?>
+        <a href="index.php?accion=iniciarCliente">
+          <i class="fas fa-sign-in-alt fa-beat"></i> Inicia Sesión
+        </a>
+        <?php endif; ?>
+      </div>
+      <div class="nav-right">
+        <?php if(isset($_SESSION["cliente_nombre"])): ?>
+        <a href="index.php?accion=logout" class="logout-link">
+          <i class="fas fa-sign-out-alt fa-beat"></i> Cerrar Sesión
+        </a>
+        <?php endif; ?>
+      </div>
+    </nav>
+  </header>
+
+  <section id="detalleProducto">
+    <!-- Aquí se cargará el producto -->
+  </section>
+
+
+
+  <footer>
+    <p>&copy; 2025 Tienda de Computadores. Todos los derechos reservados.</p>
+  </footer>
+  <div id="modalCarrito"
+    style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center;">
+    <div style="background:#fff;padding:2rem;border-radius:10px;max-width:500px;position:relative;">
+      <span id="cerrarModalCarrito"
+        style="position:absolute;top:10px;right:15px;cursor:pointer;font-size:22px;">&times;</span>
+      <h2>Carrito de Compras</h2>
+      <ul id="listaCarritoProductos"></ul>
+      <button id="btnComprarCarritoFinal" style="margin-top:10px;"><i class="fas fa-credit-card"></i> Comprar
+        Todo</button>
+    </div>
+  </div>
+  <script>
+    // Solo la lógica de mostrar el producto
+    function getQueryParam(name) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+
+    function mostrarProducto() {
+      const id = getQueryParam('id');
+      if (!id) {
+        $("#detalleProducto").html("<h2>Producto no especificado</h2>");
+        return;
+      }
+
+      $.post('Modelo/obtenerProductoCompleto.php', { id: id }, function (resp) {
+        const data = JSON.parse(resp);
+        if (!data.producto) {
+          $("#detalleProducto").html("<h2>Producto no encontrado</h2>");
+          return;
+        }
+        let imagenesHtml = '';
+        data.imagenes.forEach(img => {
+          imagenesHtml += `<img src="${img}" style="max-width:300px;max-height:300px;margin:8px;border-radius:8px;">`;
+        });
+        $("#detalleProducto").html(`
+          <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:flex-start;">
+            <div style="flex:1;min-width:320px;text-align:center;">
+              ${imagenesHtml}
+            </div>
+            <div style="flex:2;min-width:320px;">
+              <h2>${data.producto.marca} ${data.producto.modelo}</h2>
+              <p><strong>Tipo:</strong> ${data.producto.tipo}</p>
+              <p><strong>Categoría:</strong> ${data.producto.categoria}</p>
+              <p><strong>Especificaciones:</strong> ${data.producto.especificaciones}</p>
+              <p><strong>Precio:</strong> $${parseFloat(data.producto.precio).toLocaleString()}</p>
+              <label>Cantidad:</label>
+              <input type="number" id="cantidadProducto" min="1" value="1" style="width:60px;">
+              <button id="btnSolicitarCompra" style="margin-top:20px;">
+                <i class="fas fa-shopping-cart"></i> Añadir al Carrito
+              </button>
+            </div>
+          </div>
+        `);
+      });
+    }
+
+    $(document).ready(function () {
+      mostrarProducto();
+    });
+  </script>
+
+</body>
+
+</html>
